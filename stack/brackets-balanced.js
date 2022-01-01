@@ -42,6 +42,13 @@ const isBracketsBalanced = (string) => {
             return false;
         }
 
+        if (i === 0 && bracketInfo.type === BRACKET_TYPE_RIGHT) {
+            console.error('Error!');
+            console.error(`First bracket in string must be of type "${BRACKET_TYPE_LEFT}".`);
+
+            return false;
+        }
+
         if (bracketInfo.type === BRACKET_TYPE_LEFT) {
             stack.push(bracket);
         } else if (bracketInfo.type === BRACKET_TYPE_RIGHT) {
@@ -77,5 +84,6 @@ const string = '()[{()}]{}[]'; // balanced
 // const string = '([{}}{{][)))'; // error, error at index 4
 // const string = '['; // error, input too short
 // const string = '(('; // error, unclosed brackets
+// const string = '))'; // error, first bracket, incorrect type
 
 isBracketsBalanced(string);

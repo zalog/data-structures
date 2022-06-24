@@ -1,5 +1,7 @@
+import { Stack } from './Stack.js';
+
 const isBracketsBalanced = (string) => {
-    const stack = [];
+    const stack = new Stack();
     const BRACKETS = '()[]{}';
     const BRACKET_TYPE_LEFT = 'left';
     const BRACKET_TYPE_RIGHT = 'right';
@@ -20,7 +22,7 @@ const isBracketsBalanced = (string) => {
         if (bracketType === BRACKET_TYPE_LEFT) {
             stack.push(bracket);
         } else if (bracketType === BRACKET_TYPE_RIGHT) {
-            const stackLast = stack[stack.length - 1];
+            const stackLast = stack.peek;
             const bracketLeft = BRACKETS[bracketIndex - 1];
 
             if (stackLast === bracketLeft) {
@@ -35,7 +37,7 @@ const isBracketsBalanced = (string) => {
         }
     }
 
-    if (stack.length === 0) {
+    if (stack.size === 0) {
         console.info('Balanced brackets!');
 
         return true;

@@ -6,6 +6,13 @@ const isBracketsBalanced = (string) => {
     const BRACKET_TYPE_LEFT = 'left';
     const BRACKET_TYPE_RIGHT = 'right';
 
+    if (string.length < 2) {
+        console.error('Error!');
+        console.error(`Input length ${string.length} is too short to have pairs!`);
+
+        return false;
+    }
+
     for (let i = 0; i < string.length; i++) {
         const bracket = string[i];
         const bracketIndex = BRACKETS.indexOf(bracket);
@@ -47,5 +54,6 @@ const isBracketsBalanced = (string) => {
 const string = '()[{()}]{}[]'; // balanced
 // const string = '[x{}'; // error, invalid bracket
 // const string = '([{}}{{][)))'; // error, error at index 4
+// const string = '['; // error, input too short
 
 isBracketsBalanced(string);

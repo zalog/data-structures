@@ -48,6 +48,11 @@ const isBracketsBalanced = (string) => {
         console.info('Balanced brackets!');
 
         return true;
+    } else {
+        console.error('Error!');
+        console.error(`There are ${stack.size} unclosed brackets.`);
+
+        return false;
     }
 }
 
@@ -55,5 +60,6 @@ const string = '()[{()}]{}[]'; // balanced
 // const string = '[x{}'; // error, invalid bracket
 // const string = '([{}}{{][)))'; // error, error at index 4
 // const string = '['; // error, input too short
+// const string = '(('; // error, unclosed brackets
 
 isBracketsBalanced(string);

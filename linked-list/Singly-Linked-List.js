@@ -41,7 +41,7 @@ export class SinglyLinkedList {
 
     // peek head, O(1)
     get peekFirst() {
-        return this.#head.data;
+        return this.#head?.data;
     }
 
     // get list size, O(1)

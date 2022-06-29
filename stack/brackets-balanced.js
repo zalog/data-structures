@@ -5,6 +5,22 @@ const isBracketsBalanced = (string) => {
     const BRACKETS = '()[]{}';
     const BRACKET_TYPE_LEFT = 'left';
     const BRACKET_TYPE_RIGHT = 'right';
+    const getBracketInfo = (bracket) => {
+        const bracketIndex = BRACKETS.indexOf(bracket);
+
+        let type = BRACKET_TYPE_LEFT;
+        let pair = BRACKETS[bracketIndex + 1];
+
+        if (bracketIndex % 2) {
+            type = BRACKET_TYPE_RIGHT;
+            pair = BRACKETS[bracketIndex - 1];
+        }
+
+        return {
+            type,
+            pair,
+        };
+    }
 
     if (string.length < 2) {
         console.error('Error!');
@@ -15,27 +31,25 @@ const isBracketsBalanced = (string) => {
 
     for (let i = 0; i < string.length; i++) {
         const bracket = string[i];
-        const bracketIndex = BRACKETS.indexOf(bracket);
+        const bracketInfo = getBracketInfo(bracket);
 
-        if (bracketIndex === -1) {
+        if (!bracketInfo) {
             console.error('Error!');
             console.error(`"${bracket}" is an invalid bracket.`);
 
             return false;
         }
 
-        const bracketType = (bracketIndex % 2) ? BRACKET_TYPE_RIGHT : BRACKET_TYPE_LEFT;
-
-        if (bracketType === BRACKET_TYPE_LEFT) {
+        if (bracketInfo.type === BRACKET_TYPE_LEFT) {
             stack.push(bracket);
-        } else if (bracketType === BRACKET_TYPE_RIGHT) {
+        } else if (bracketInfo.type === BRACKET_TYPE_RIGHT) {
             const stackLast = stack.peek;
-            const bracketLeft = BRACKETS[bracketIndex - 1];
+            const bracketLeft = bracketInfo.pair;
 
             if (stackLast === bracketLeft) {
                 stack.pop();
             } else {
-                const neededBracketEnd = BRACKETS[BRACKETS.indexOf(stackLast) + 1];
+                const neededBracketEnd = getBracketInfo(stackLast).pair;
                 console.error('Error with not balanced brackets!');
                 console.error(`At index ${i} bracket "${bracket}" was given, but needed to close "${stackLast}" with "${neededBracketEnd}".`);
 

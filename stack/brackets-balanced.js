@@ -15,6 +15,8 @@ const isBracketsBalanced = (string) => {
     const getBracketInfo = (bracket) => {
         const bracketIndex = BRACKETS.indexOf(bracket);
 
+        if (bracketIndex === -1) return false;
+
         let type = BRACKET_TYPE_LEFT;
         let pair = BRACKETS[bracketIndex + 1];
 

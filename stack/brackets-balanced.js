@@ -1,6 +1,13 @@
 import { Stack } from './Stack.js';
 
 const isBracketsBalanced = (string) => {
+    if (string.length < 2) {
+        console.error('Error!');
+        console.error(`Input length ${string.length} is too short to have pairs!`);
+
+        return false;
+    }
+
     const stack = new Stack();
     const BRACKETS = '()[]{}';
     const BRACKET_TYPE_LEFT = 'left';
@@ -20,13 +27,6 @@ const isBracketsBalanced = (string) => {
             type,
             pair,
         };
-    }
-
-    if (string.length < 2) {
-        console.error('Error!');
-        console.error(`Input length ${string.length} is too short to have pairs!`);
-
-        return false;
     }
 
     for (let i = 0; i < string.length; i++) {
